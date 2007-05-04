@@ -71,11 +71,11 @@ rm -rf %{buildroot}/%{_libdir}/gtk-2.0/immodules/*.{a,la}
 rm -rf %{buildroot}/%{_libdir}/oxim/modules/*.{a,la}
 rm -rf %{buildroot}/%{_sysconfdir}/X11/xinit/xinput.d/%{name}
 
-%post -n %{libname}
+%post
 /sbin/ldconfig
 gtk-query-immodules-2.0 > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
 
-%postun -n %{libname}
+%postun
 /sbin/ldconfig
 gtk-query-immodules-2.0 > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
 
