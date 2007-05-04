@@ -1,5 +1,5 @@
 %define version      1.1.2.92
-%define release      %mkrel 2
+%define release      %mkrel 3
 
 %define libname_orig lib%{name}
 %define libname %mklibname %{name} 0
@@ -22,7 +22,8 @@ Requires:        libchewing-data
 BuildRequires:   zlib-devel
 BuildRequires:   gtk2-devel
 #BuildRequires:   libtabe-devel db4.3-devel
-BuildRequires:	libtabe-devel db4.5-devel
+BuildRequires:	libtabe-devel >= 0.26-7mdv
+BuildRequires:	db4.5-devel
 BuildRequires:   libchewing-devel
 BuildRequires:   qt3-devel
 BuildRequires:   X11-devel
