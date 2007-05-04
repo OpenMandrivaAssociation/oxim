@@ -1,5 +1,5 @@
 %define version      1.1.2.92
-%define release      %mkrel 3
+%define release      %mkrel 4
 
 %define libname_orig lib%{name}
 %define libname %mklibname %{name} 0
@@ -18,6 +18,7 @@ BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Obsoletes:       xcin >= 3.0.0
 Provides:        xcin >= 3.0.0
 Requires:        zlib
+Requires:		%{libname} = %{version}-%{release}
 Requires:        libchewing-data
 BuildRequires:   zlib-devel
 BuildRequires:   gtk2-devel
@@ -88,12 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/oxim
 %config(noreplace) %{_sysconfdir}/oxim/*
 %{_bindir}/oxim*
-
-%files -n %{libname}
-%defattr(-,root,root)
-%doc COPYING
 %{_libdir}/gtk-2.0/immodules/gtk-im-oxim.so
-%{_libdir}/liboxim.so*
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/modules
 %{_libdir}/%{name}/modules/*.so
@@ -101,6 +97,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}/immodules/gtk*
 %{_libdir}/%{name}/panels/*
 %{_libdir}/%{name}/tables/*
+
+%files -n %{libname}
+%defattr(-,root,root)
+%doc COPYING
+%{_libdir}/liboxim.so*
 
 %files qtimm
 %defattr(-,root,root)
