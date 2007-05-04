@@ -22,8 +22,8 @@ Requires:        libchewing-data
 BuildRequires:   zlib-devel
 BuildRequires:   gtk2-devel
 #BuildRequires:   libtabe-devel db4.3-devel
-BuildRequires:	libtabe-devel >= 0.26-7mdv
-BuildRequires:	db4.5-devel
+#BuildRequires:	tabe-devel >= 0.2.6-7mdv
+#BuildRequires:	db-devel
 BuildRequires:   libchewing-devel
 BuildRequires:   qt3-devel
 BuildRequires:   X11-devel
@@ -57,7 +57,8 @@ sed -i 's/$(QTDIR)\/lib/$(QTDIR)\/%(echo %_lib)/' src/qt-immodule/Makefile.in sr
 cp %SOURCE1 README.en
 
 %build
-%configure2_5x --with-tabe-data=%{_libdir}/tabe --disable-static --with-tabe-lib=%_libdir
+#%configure2_5x --with-tabe-data=%{_libdir}/tabe --disable-static --with-tabe-lib=%_libdir
+%configure2_5x --disable-static
 %make
 
 %install
