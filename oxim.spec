@@ -1,5 +1,5 @@
-%define version      1.1.2.92
-%define release      %mkrel 5
+%define version      1.1.3
+%define release      %mkrel 1
 
 %define libname_orig lib%{name}
 %define libname %mklibname %{name} 0
@@ -109,6 +109,3 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}/immodules
 %{_libdir}/%{name}/immodules/qt*
 %{qt3plugins}/inputmethods/*.so
-
-
-
