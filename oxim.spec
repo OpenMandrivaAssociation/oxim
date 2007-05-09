@@ -4,30 +4,25 @@
 %define libname_orig lib%{name}
 %define libname %mklibname %{name} 0
 
-Summary:    Another Input Method for traditional Chinese
-Name:       oxim
-Version:    %{version}
-Release:    %{release}
-License:    GPL
-Group:      System/Internationalization
-URL:        http://opendesktop.org.tw/demopage/oxim/
-Source0:    ftp://140.111.128.66/odp/OXIM/Source/%{name}-%{version}.tar.gz
-Source1:    oxim_README.en
+Summary:	Another Input Method for traditional Chinese
+Name:		oxim
+Version:	%{version}
+Release:	%{release}
+License:	GPL
+Group:		System/Internationalization
+URL:		http://opendesktop.org.tw/demopage/oxim/
+Source0:	ftp://140.111.128.66/odp/OXIM/Source/%{name}-%{version}.tar.gz
+Source1:	oxim_README.en
 
-BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Obsoletes:       xcin >= 3.0.0
-Provides:        xcin >= 3.0.0
-Requires:        zlib
-Requires:		%{libname} = %{version}-%{release}
-Requires:        libchewing-data
-BuildRequires:   zlib-devel
-BuildRequires:   gtk2-devel
-#BuildRequires:   libtabe-devel db4.3-devel
-#BuildRequires:	tabe-devel >= 0.2.6-7mdv
-#BuildRequires:	db-devel
-BuildRequires:   libchewing-devel
-BuildRequires:   qt3-devel
-BuildRequires:   X11-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Requires:	zlib
+Requires:	%{libname} = %{version}-%{release}
+Requires:	libchewing-data
+BuildRequires:	zlib-devel
+BuildRequires:	gtk2-devel
+BuildRequires:	libchewing-devel
+BuildRequires:	qt3-devel
+BuildRequires:	X11-devel
 
 %description
 Another Input Method for traditional Chinese.
@@ -58,7 +53,6 @@ sed -i 's/$(QTDIR)\/lib/$(QTDIR)\/%(echo %_lib)/' src/qt-immodule/Makefile.in sr
 cp %SOURCE1 README.en
 
 %build
-#%configure2_5x --with-tabe-data=%{_libdir}/tabe --disable-static --with-tabe-lib=%_libdir
 %configure2_5x --disable-static
 %make
 
@@ -70,18 +64,22 @@ rm -rf %{buildroot}/%{_libdir}/*.{a,la}
 rm -rf %{buildroot}/%{_libdir}/gtk-2.0/immodules/*.{a,la}
 rm -rf %{buildroot}/%{_libdir}/oxim/modules/*.{a,la}
 rm -rf %{buildroot}/%{_sysconfdir}/X11/xinit/xinput.d/%{name}
+rm -rf %{buildroot}/%{_libdir}/liboxim.so
 
 %post
-/sbin/ldconfig
 gtk-query-immodules-2.0 > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
 
 %postun
-/sbin/ldconfig
 gtk-query-immodules-2.0 > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
+
+%post -n %{libname}
+/sbin/ldconfig
+
+%postun -n %{libname}
+/sbin/ldconfig
 
 %clean 
 rm -rf $RPM_BUILD_ROOT
-
 
 %files
 %defattr(-,root,root)
