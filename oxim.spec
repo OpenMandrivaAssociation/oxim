@@ -14,6 +14,7 @@ URL:		http://opendesktop.org.tw/demopage/oxim/
 Source0:	ftp://140.111.128.66/odp/OXIM/Source/%{name}-%{version}.tar.gz
 Source1:	oxim_README.en
 
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	zlib
 Requires:	%{libname} = %{version}-%{release}
 Requires:	libchewing-data
