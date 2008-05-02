@@ -54,7 +54,6 @@ cp %SOURCE1 README.en
 
 %build
 ./autogen.sh
-sed -i 's/${qt_dir}\/plugins\/inputmethods/${qt_dir}\/plugins\/%(echo %_lib)\/inputmethods/' configure configure.ac
 %configure2_5x --disable-static
 %make
 
@@ -67,6 +66,9 @@ rm -rf %{buildroot}/%{_libdir}/gtk-2.0/immodules/*.{a,la}
 rm -rf %{buildroot}/%{_libdir}/oxim/modules/*.{a,la}
 rm -rf %{buildroot}/%{_sysconfdir}/X11/xinit/xinput.d/%{name}
 rm -rf %{buildroot}/%{_libdir}/liboxim.so
+
+mkdir -p %buildroot%qt3plugins/inputmethods/
+mv %buildroot%qt3dir/plugins/inputmethods/qt-im-oxim.so %buildroot%qt3plugins/inputmethods/
 
 %post
 gtk-query-immodules-2.0 > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
