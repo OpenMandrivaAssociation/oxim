@@ -1,4 +1,4 @@
-%define version      1.1.3
+%define version      1.1.6
 %define release      %mkrel 1
 
 %define libname_orig lib%{name}
@@ -8,7 +8,7 @@ Summary:	Another Input Method for traditional Chinese
 Name:		oxim
 Version:	%{version}
 Release:	%{release}
-License:	GPL
+License:	GPLv2+
 Group:		System/Internationalization
 URL:		http://opendesktop.org.tw/demopage/oxim/
 Source0:	ftp://140.111.128.66/odp/OXIM/Source/%{name}-%{version}.tar.gz
@@ -53,6 +53,7 @@ sed -i 's/$(QTDIR)\/lib/$(QTDIR)\/%(echo %_lib)/' src/qt-immodule/Makefile.in sr
 cp %SOURCE1 README.en
 
 %build
+./autogen.sh
 %configure2_5x --disable-static
 %make
 
