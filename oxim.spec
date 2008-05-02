@@ -54,6 +54,7 @@ cp %SOURCE1 README.en
 
 %build
 ./autogen.sh
+sed -i 's/${qt_dir}\/plugins\/inputmethods/${qt_dir}\/plugins\/%(echo %_lib)\/inputmethods/' configure configure.ac
 %configure2_5x --disable-static
 %make
 
@@ -69,9 +70,11 @@ rm -rf %{buildroot}/%{_libdir}/liboxim.so
 
 %post
 gtk-query-immodules-2.0 > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
+%update_menus
 
 %postun
 gtk-query-immodules-2.0 > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
+%clean_menus
 
 %post -n %{libname}
 /sbin/ldconfig
@@ -88,6 +91,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/oxim
 %config(noreplace) %{_sysconfdir}/oxim/*
 %{_bindir}/oxim*
+%{_datadir}/applications/*.desktop
+%{_datadir}/pixmaps/*.png
 %{_libdir}/gtk-2.0/immodules/gtk-im-oxim.so
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/modules
