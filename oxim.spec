@@ -1,8 +1,8 @@
 %define version      1.2.1
-%define release      %mkrel 1
+%define release      %mkrel 2
 
-%define libname_orig lib%{name}
 %define libname %mklibname %{name} 0
+%define develname %mklibname -d %{name}
 
 Summary:	Another Input Method for traditional Chinese
 Name:		oxim
@@ -27,14 +27,21 @@ BuildRequires:	X11-devel
 %description
 Another Input Method for traditional Chinese.
 
-
 %package -n %{libname}
 Summary:    Oxim library
 Group:      System/Internationalization
-Provides:   %{libname_orig} = %{version}-%{release}
 
 %description -n %{libname}
 Oxim library.
+
+%package -n %{develname}
+Summary:    Oxim Development files
+Group:      System/Internationalization
+Requires:   %{libname} = %{version}-%{release}
+Provides:   %{name}-devel = %{version}-%{release}
+
+%description -n %{develname}
+Oxim Development files.
 
 %package    qtimm
 Summary:    Oxim plugin for qt-immodule
@@ -65,7 +72,6 @@ rm -rf %{buildroot}/%{_libdir}/*.{a,la}
 rm -rf %{buildroot}/%{_libdir}/gtk-2.0/immodules/*.{a,la}
 rm -rf %{buildroot}/%{_libdir}/oxim/modules/*.{a,la}
 rm -rf %{buildroot}/%{_sysconfdir}/X11/xinit/xinput.d/%{name}
-rm -rf %{buildroot}/%{_libdir}/liboxim.so
 rm -rf %{buildroot}/%{_datadir}/gettext
 
 %post
@@ -110,7 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n %{libname}
 %defattr(-,root,root)
 %doc COPYING
-%{_libdir}/liboxim.so*
+%{_libdir}/liboxim.so.*
 
 %files qtimm
 %defattr(-,root,root)
@@ -118,3 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}/immodules
 %{_libdir}/%{name}/immodules/qt*
 %{qt3plugins}/inputmethods/*.so
+
+%files -n %{develname}
+%defattr(-,root,root)
+%{_libdir}/liboxim.so
