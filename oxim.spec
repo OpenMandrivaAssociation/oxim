@@ -1,5 +1,5 @@
 %define version      1.2.1
-%define release      %mkrel 2
+%define release      %mkrel 3
 
 %define libname %mklibname %{name} 0
 %define develname %mklibname -d %{name}
@@ -23,6 +23,7 @@ BuildRequires:	gtk2-devel
 BuildRequires:	libchewing-devel
 BuildRequires:	qt3-devel
 BuildRequires:	X11-devel
+Suggests:	oxim-setup >= 1.2.1
 
 %description
 Another Input Method for traditional Chinese.
