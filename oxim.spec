@@ -1,5 +1,5 @@
-%define version      1.1.6
-%define release      %mkrel 3
+%define version      1.2.1
+%define release      %mkrel 1
 
 %define libname_orig lib%{name}
 %define libname %mklibname %{name} 0
@@ -13,7 +13,7 @@ Group:		System/Internationalization
 URL:		http://opendesktop.org.tw/demopage/oxim/
 Source0:	ftp://140.111.128.66/odp/OXIM/Source/%{name}-%{version}.tar.gz
 Source1:	oxim_README.en
-
+Patch0:		oxim-1.2.1-fix-str-fmt.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	zlib
 Requires:	%{libname} = %{version}-%{release}
@@ -46,11 +46,11 @@ Oxim plugin for qt-immodule.
 
 %prep
 %setup -q
+%patch0 -p0
 
 cp %SOURCE1 README.en
 
 %build
-./autogen.sh
 %configure2_5x --disable-static --with-qt-dir=%{qt3dir} --with-qt-imdir=%{qt3plugins}/inputmethods
 %make
 
@@ -58,12 +58,15 @@ cp %SOURCE1 README.en
 rm -fr %buildroot
 %makeinstall_std
 
+%find_lang %name
+
 # remove devel files
 rm -rf %{buildroot}/%{_libdir}/*.{a,la}
 rm -rf %{buildroot}/%{_libdir}/gtk-2.0/immodules/*.{a,la}
 rm -rf %{buildroot}/%{_libdir}/oxim/modules/*.{a,la}
 rm -rf %{buildroot}/%{_sysconfdir}/X11/xinit/xinput.d/%{name}
 rm -rf %{buildroot}/%{_libdir}/liboxim.so
+rm -rf %{buildroot}/%{_datadir}/gettext
 
 %post
 gtk-query-immodules-2.0 > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
@@ -88,14 +91,12 @@ gtk-query-immodules-2.0 > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
 %clean 
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %name.lang
 %defattr(-,root,root)
 %doc README README.en COPYING AUTHORS
 %dir %{_sysconfdir}/oxim
 %config(noreplace) %{_sysconfdir}/oxim/*
 %{_bindir}/oxim*
-%{_datadir}/applications/*.desktop
-%{_datadir}/pixmaps/*.png
 %{_libdir}/gtk-2.0/immodules/gtk-im-oxim.so
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/modules
@@ -104,6 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}/immodules/gtk*
 %{_libdir}/%{name}/panels/*
 %{_libdir}/%{name}/tables/*
+%{_mandir}/man1/*
 
 %files -n %{libname}
 %defattr(-,root,root)
