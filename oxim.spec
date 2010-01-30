@@ -1,4 +1,4 @@
-%define version      1.2.2
+%define version      1.4.1
 %define release      %mkrel 1
 
 %define libname %mklibname %{name} 0
@@ -14,6 +14,7 @@ URL:		http://opendesktop.org.tw/demopage/oxim/
 Source0:	ftp://140.111.128.66/odp/OXIM/Source/%{name}-%{version}.tar.gz
 Source1:	oxim_README.en
 Patch0:		oxim-1.2.1-fix-str-fmt.patch
+Patch1:		oxim-1.4.1-link.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	zlib
 Requires:	%{libname} = %{version}-%{release}
@@ -55,6 +56,7 @@ Oxim plugin for qt-immodule.
 %prep
 %setup -q
 %patch0 -p0
+%patch1 -p0
 
 cp %SOURCE1 README.en
 
