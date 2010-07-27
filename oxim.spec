@@ -130,4 +130,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n %{develname}
 %defattr(-,root,root)
+%{_includedir}/%{name}
 %{_libdir}/liboxim.so
+%{_libdir}/pkgconfig/*.pc
