@@ -1,5 +1,5 @@
 %define version      1.4.4
-%define release      %mkrel 1
+%define release      %mkrel 2
 
 %define libname %mklibname %{name} 0
 %define develname %mklibname -d %{name}
@@ -23,7 +23,13 @@ BuildRequires:	zlib-devel
 BuildRequires:	gtk2-devel
 BuildRequires:	libchewing-devel
 BuildRequires:	qt3-devel
-BuildRequires:	X11-devel
+BuildRequires:	libx11-devel
+BuildRequires:	libxext-devel
+BuildRequires:	libxft-devel
+BuildRequires:	libxpm-devel
+BuildRequires:	libxtst-devel
+BuildRequires:	gettext-devel
+BuildRequires:	fontconfig-devel
 Suggests:	oxim-setup >= 1.2.1
 
 %description
