@@ -1,0 +1,79 @@
+--- src/modules/chewing/Makefile.am.old	2010-01-30 21:27:39.000000000 +0100
++++ src/modules/chewing/Makefile.am	2010-01-30 21:28:18.000000000 +0100
+@@ -21,6 +21,6 @@
+         -avoid-version \
+         -module
+ 
+-chewing_la_LIBADD = $(CHEWING_LIBS) $(ICONV_LIB)
++chewing_la_LIBADD = $(CHEWING_LIBS) $(ICONV_LIB) $(top_builddir)/src/lib/liboxim.la
+ 
+ endif
+--- src/modules/chewing/Makefile.in.old	2010-01-30 21:28:24.000000000 +0100
++++ src/modules/chewing/Makefile.in	2010-01-30 21:28:35.000000000 +0100
+@@ -281,7 +281,7 @@
+ @ENABLE_CHEWING_MODULE_TRUE@        -avoid-version \
+ @ENABLE_CHEWING_MODULE_TRUE@        -module
+ 
+-@ENABLE_CHEWING_MODULE_TRUE@chewing_la_LIBADD = $(CHEWING_LIBS) $(ICONV_LIB)
++@ENABLE_CHEWING_MODULE_TRUE@chewing_la_LIBADD = $(CHEWING_LIBS) $(ICONV_LIB) $(top_builddir)/src/lib/liboxim.la
+ all: all-am
+ 
+ .SUFFIXES:
+--- src/modules/gen-inp-v1/Makefile.am.old	2010-01-30 21:30:27.000000000 +0100
++++ src/modules/gen-inp-v1/Makefile.am	2010-01-30 21:30:46.000000000 +0100
+@@ -12,3 +12,5 @@
+ gen_inp_v1_la_LDFLAGS = \
+         -avoid-version \
+         -module
++
++gen_inp_v1_la_LIBADD = $(top_builddir)/src/lib/liboxim.la
+--- src/modules/gen-inp-v1/Makefile.in.old	2010-01-30 21:30:52.000000000 +0100
++++ src/modules/gen-inp-v1/Makefile.in	2010-01-30 21:31:00.000000000 +0100
+@@ -67,7 +67,7 @@
+   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
+ am__installdirs = "$(DESTDIR)$(moduledir)"
+ LTLIBRARIES = $(module_LTLIBRARIES)
+-gen_inp_v1_la_LIBADD =
++gen_inp_v1_la_LIBADD = $(top_builddir)/src/lib/liboxim.la
+ am_gen_inp_v1_la_OBJECTS = gen-inp-v1.lo
+ gen_inp_v1_la_OBJECTS = $(am_gen_inp_v1_la_OBJECTS)
+ gen_inp_v1_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
+--- src/modules/gen-inp/Makefile.am.old	2010-01-30 21:29:40.000000000 +0100
++++ src/modules/gen-inp/Makefile.am	2010-01-30 21:29:59.000000000 +0100
+@@ -12,3 +12,5 @@
+ gen_inp_la_LDFLAGS = \
+         -avoid-version \
+         -module
++
++gen_inp_la_LIBADD = $(top_builddir)/src/lib/liboxim.la
+--- src/modules/gen-inp/Makefile.in.old	2010-01-30 21:30:07.000000000 +0100
++++ src/modules/gen-inp/Makefile.in	2010-01-30 21:30:17.000000000 +0100
+@@ -67,7 +67,7 @@
+   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
+ am__installdirs = "$(DESTDIR)$(moduledir)"
+ LTLIBRARIES = $(module_LTLIBRARIES)
+-gen_inp_la_LIBADD =
++gen_inp_la_LIBADD = $(top_builddir)/src/lib/liboxim.la
+ am_gen_inp_la_OBJECTS = gen-inp.lo
+ gen_inp_la_OBJECTS = $(am_gen_inp_la_OBJECTS)
+ gen_inp_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
+--- src/modules/unicode/Makefile.am.old	2010-01-30 21:28:45.000000000 +0100
++++ src/modules/unicode/Makefile.am	2010-01-30 21:29:03.000000000 +0100
+@@ -12,4 +12,6 @@
+         -avoid-version \
+         -module
+ 
++unicode_la_LIBADD = $(top_builddir)/src/lib/liboxim.la
++
+ endif
+--- src/modules/unicode/Makefile.in.old	2010-01-30 21:29:11.000000000 +0100
++++ src/modules/unicode/Makefile.in	2010-01-30 21:29:20.000000000 +0100
+@@ -67,7 +67,7 @@
+   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
+ am__installdirs = "$(DESTDIR)$(moduledir)"
+ LTLIBRARIES = $(module_LTLIBRARIES)
+-unicode_la_LIBADD =
++unicode_la_LIBADD = $(top_builddir)/src/lib/liboxim.la
+ am__unicode_la_SOURCES_DIST = unicode.c unicode.h
+ @ENABLE_UNICODE_MODULE_TRUE@am_unicode_la_OBJECTS = unicode.lo
+ unicode_la_OBJECTS = $(am_unicode_la_OBJECTS)

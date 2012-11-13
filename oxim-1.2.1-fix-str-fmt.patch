@@ -1,0 +1,11 @@
+--- src/qt-immodule/qoximinputcontext_x11.cpp.str	2009-02-06 20:11:30.000000000 +0100
++++ src/qt-immodule/qoximinputcontext_x11.cpp	2009-02-06 20:13:01.000000000 +0100
+@@ -625,7 +625,7 @@
+ 
+ void QXIMInputContext::close( const QString &errMsg )
+ {
+-    qDebug( errMsg );
++    qDebug( "%s", (const char *)errMsg);
+     emit deletionRequested();
+ }
+ 
